@@ -1,1 +1,1 @@
-# MBA Residency
+# MBA
