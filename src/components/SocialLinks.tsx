@@ -4,22 +4,22 @@ import { Card, CardContent } from "@/components/ui/card";
 const SocialLinks = () => {
   const socialLinks = [
     {
-      name: "MBA Official",
-      handle: "@mba_official",
-      url: "https://twitter.com/mba_official",
-      description: "Follow our main account for updates and wellness tips"
+      name: "Rohan",
+      handle: "@rohan",
+      url: "#",
+      description: ""
     },
     {
-      name: "MBA Community", 
-      handle: "@mba_community",
-      url: "https://twitter.com/mba_community",
-      description: "Join our community discussions and success stories"
+      name: "Kirtika Goyal", 
+      handle: "@kirtikagoyal",
+      url: "#",
+      description: ""
     },
     {
-      name: "MBA Founders",
-      handle: "@mba_founders", 
-      url: "https://twitter.com/mba_founders",
-      description: "Connect with our founders and thought leadership"
+      name: "Srikarmk",
+      handle: "@Srikarismad", 
+      url: "#",
+      description: ""
     }
   ];
 
@@ -31,7 +31,7 @@ const SocialLinks = () => {
             Connect With Us
           </h3>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Stay updated with our latest insights, tips, and community highlights on Twitter
+           Connect with the team to know more!
           </p>
         </div>
         

@@ -15,7 +15,7 @@ const ComingSoonMarquee = () => {
           🌿 Founder Residency Plans 🌿
         </span>
         <span className="text-lg font-semibold mx-8">
-          🌟 COMING SOON - Mind, Body, Aaram Revolution 🌟
+          🌟 COMING SOON - Mind, Body, Aaram 🌟
         </span>
         <span className="text-lg font-semibold mx-8">
           ✨ Transform Your Wellness Journey ✨
