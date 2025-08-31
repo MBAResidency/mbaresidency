@@ -1,6 +1,12 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -11,7 +17,8 @@ const ContactForm = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    project: ""
+    project: "",
+    companyName: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
@@ -22,14 +29,14 @@ const ContactForm = () => {
 
     // Simulate form submission - Replace this with actual Supabase integration
     try {
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
       toast({
         title: "Form submitted successfully!",
         description: "We'll get back to you soon.",
       });
-      
-      setFormData({ name: "", email: "", project: "" });
+
+      setFormData({ name: "", email: "", project: "", companyName: "" });
     } catch (error) {
       toast({
         title: "Submission failed",
@@ -41,10 +48,12 @@ const ContactForm = () => {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData(prev => ({
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     }));
   };
 
@@ -58,13 +67,18 @@ const ContactForm = () => {
                 Pre Register with us!
               </CardTitle>
               <CardDescription className="text-lg text-muted-foreground">
-                Ready to start your wellness journey? Share your project field with us and let's create something amazing together. We're gonna be introducing our cohorts soon!
+                Ready to start your wellness journey? Share your project field
+                with us and let's create something amazing together. We're gonna
+                be introducing our cohorts soon!
               </CardDescription>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="space-y-2">
-                  <Label htmlFor="name" className="text-card-foreground font-medium">
+                  <Label
+                    htmlFor="name"
+                    className="text-card-foreground font-medium"
+                  >
                     Full Name
                   </Label>
                   <Input
@@ -78,9 +92,12 @@ const ContactForm = () => {
                     className="bg-background border-border focus:ring-primary"
                   />
                 </div>
-                
+
                 <div className="space-y-2">
-                  <Label htmlFor="email" className="text-card-foreground font-medium">
+                  <Label
+                    htmlFor="email"
+                    className="text-card-foreground font-medium"
+                  >
                     Email Address
                   </Label>
                   <Input
@@ -94,9 +111,31 @@ const ContactForm = () => {
                     className="bg-background border-border focus:ring-primary"
                   />
                 </div>
-                
+
                 <div className="space-y-2">
-                  <Label htmlFor="project" className="text-card-foreground font-medium">
+                  <Label
+                    htmlFor="name"
+                    className="text-card-foreground font-medium"
+                  >
+                    Company Name
+                  </Label>
+                  <Input
+                    id="companyName"
+                    name="companyName"
+                    type="text"
+                    placeholder="Enter your company name"
+                    value={formData.companyName}
+                    onChange={handleChange}
+                    required
+                    className="bg-background border-border focus:ring-primary"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label
+                    htmlFor="project"
+                    className="text-card-foreground font-medium"
+                  >
                     Project Field
                   </Label>
                   <Textarea
@@ -110,9 +149,9 @@ const ContactForm = () => {
                     className="bg-background border-border focus:ring-primary resize-none"
                   />
                 </div>
-                
-                <Button 
-                  type="submit" 
+
+                <Button
+                  type="submit"
                   disabled={isSubmitting}
                   className="w-full bg-gradient-primary hover:opacity-90 text-primary-foreground font-semibold py-3 rounded-lg transition-all duration-300 shadow-soft hover:shadow-medium"
                 >

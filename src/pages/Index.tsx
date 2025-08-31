@@ -1,6 +1,6 @@
 import ComingSoonMarquee from "@/components/ComingSoonMarquee";
 import BrandSection from "@/components/BrandSection";
-import WhatWeDoSection from "@/components/WhatWeDoSection";
+import WhatWePractice from "@/components/WhatWePractice";
 import ContactForm from "@/components/ContactForm";
 import SocialLinks from "@/components/SocialLinks";
 
@@ -9,7 +9,7 @@ const Index = () => {
     <main className="min-h-screen">
       <ComingSoonMarquee />
       <BrandSection />
-      <WhatWeDoSection />
+      <WhatWePractice />
       <ContactForm />
       <SocialLinks />
     </main>
