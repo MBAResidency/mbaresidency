@@ -8,20 +8,19 @@ const BrandSection = () => {
     <section className="py-20 bg-gradient-subtle">
       <div className="container mx-auto px-6 text-center">
         <section className="py-5 text-center">
-          <h3 className="text-5xl md:text-6xl font-bold text-green-600">
-            Your body is your cofounder
+          <h3 className="text-5xl md:text-7xl font-bold text-green-600">
+            <span className="text-black">Your body is your</span> co-founder
           </h3>
-          <p className="text-xl md:text-2xl text-muted-foreground mt-6">
-            Time to listen
+          <p className="text-xl md:text-2xl text-muted-foreground mt-8">
+            Let rhythm lead.
           </p>
         </section>
         <div className="animate-fade-in">
-          <h2 className="text-6xl md:text-7xl font-bold mt-5 mb-4 text-green-600">
-            MBA
-          </h2>
-          <p className="text-xl md:text-2xl text-muted-foreground mb-8">
-            Mind Body Aaram
-          </p>
+          <div className="text-6xl md:text-5xl font-bold mt-5 mb-4 sm:flex items-center justify-center gap-5">
+            <span className="text-green-600 block sm:inline">MBA : </span>
+            <span className="text-black text-3xl mt-2">Mind Body Aaram</span>
+          </div>
+
           <div className="w-24 h-1 bg-gradient-primary mx-auto rounded-full mb-6" />
 
           {/* Toggle Section */}
