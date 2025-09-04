@@ -6,7 +6,7 @@ const WhatWePractice = () => {
       icon: Brain,
       title: "Thought Energy",
       description:
-        "Reset your inner OS. Spot draining loops. Act intentionally.",
+        "Clear mental clutter. Remove hidden blockers, lighten your mental load, and move from reactivity to sharp, intentional thinking.",
       color: "blue",
       bgColor: "bg-green-50",
       borderColor: "border-blue-200",
@@ -16,7 +16,7 @@ const WhatWePractice = () => {
       icon: Heart,
       title: "Vital Energy",
       description:
-        "Rituals for body rhythm: hydration, grounding, mindful movement.",
+        "Rebuild your energy from the ground up. Engage in natural hydration, modern grounding, and mindful movement through outdoor play—designed to recharge without overwhelm.",
       color: "green",
       bgColor: "bg-green-50",
       borderColor: "border-green-200",
@@ -26,7 +26,7 @@ const WhatWePractice = () => {
       icon: Moon,
       title: "Rest Energy",
       description:
-        "Stillness as a superpower. Nightly repair and emotional release.",
+        "Restore what hustle takes away. Practice deep rest with Yoga Nidra—proven to lower stress, upgrade immunity, and improve mental clarity.",
       color: "green",
       bgColor: "bg-green-50",
       borderColor: "border-green-200",
@@ -38,12 +38,11 @@ const WhatWePractice = () => {
     <section className="py-20 bg-background">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16 animate-fade-in">
-          <h3 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
-            What You'll Practice
+          <h3 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">
+            What you will practice
           </h3>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Three core energies that form the foundation of sustainable
-            leadership
+            Three core energies that power sustainable leadership
           </p>
         </div>
 

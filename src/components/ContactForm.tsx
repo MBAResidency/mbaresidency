@@ -12,16 +12,29 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Send } from "lucide-react";
+import { Slider } from "@/components/ui/slider";
+import { cn } from "@/lib/utils";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
-    name: "",
+    fullName: "",
+    company: "",
+    sector: "",
+    website: "",
     email: "",
-    project: "",
-    companyName: "",
+    role: "founder" as "founder" | "investor" | "cofounder" | "team",
+    lookingForward: "",
+    relationScore: 5,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
+
+  const roleOptions = [
+    { key: "founder", label: "Founder" },
+    { key: "investor", label: "Investor" },
+    { key: "cofounder", label: "Co-founder" },
+    { key: "team", label: "Team member" },
+  ] as const;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,7 +49,16 @@ const ContactForm = () => {
         description: "We'll get back to you soon.",
       });
 
-      setFormData({ name: "", email: "", project: "", companyName: "" });
+      setFormData({
+        fullName: "",
+        company: "",
+        sector: "",
+        website: "",
+        email: "",
+        role: "founder",
+        lookingForward: "",
+        relationScore: 5,
+      });
     } catch (error) {
       toast({
         title: "Submission failed",
@@ -63,34 +85,88 @@ const ContactForm = () => {
         <div className="max-w-2xl mx-auto">
           <Card className="shadow-large border-0 bg-card">
             <CardHeader className="text-center">
-              <CardTitle className="text-3xl font-bold text-card-foreground mb-2">
-                Pre Register with us!
+              <CardTitle className="text-2xl md:text-3xl font-bold text-card-foreground mb-2">
+                Apply for the Residency
               </CardTitle>
-              <CardDescription className="text-lg text-muted-foreground">
-                Ready to start your wellness journey? Share your project field
-                with us and let's create something amazing together. We're gonna
-                be introducing our cohorts soon!
+              <CardDescription className="text-base md:text-lg text-muted-foreground">
+                Please share a few details to help us prepare for the residency.
               </CardDescription>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="space-y-2">
-                  <Label
-                    htmlFor="name"
-                    className="text-card-foreground font-medium"
-                  >
-                    Full Name
-                  </Label>
-                  <Input
-                    id="name"
-                    name="name"
-                    type="text"
-                    placeholder="Enter your full name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="bg-background border-border focus:ring-primary"
-                  />
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <Label
+                      htmlFor="fullName"
+                      className="text-card-foreground font-medium"
+                    >
+                      Full name
+                    </Label>
+                    <Input
+                      id="fullName"
+                      name="fullName"
+                      type="text"
+                      placeholder="Enter your full name"
+                      value={formData.fullName}
+                      onChange={handleChange}
+                      required
+                      className="bg-background border-border focus:ring-primary"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label
+                      htmlFor="company"
+                      className="text-card-foreground font-medium"
+                    >
+                      Company
+                    </Label>
+                    <Input
+                      id="company"
+                      name="company"
+                      type="text"
+                      placeholder="Enter your company name"
+                      value={formData.company}
+                      onChange={handleChange}
+                      className="bg-background border-border focus:ring-primary"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <Label
+                      htmlFor="sector"
+                      className="text-card-foreground font-medium"
+                    >
+                      Sector
+                    </Label>
+                    <Input
+                      id="sector"
+                      name="sector"
+                      type="text"
+                      placeholder="Sector or industry"
+                      value={formData.sector}
+                      onChange={handleChange}
+                      className="bg-background border-border focus:ring-primary"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label
+                      htmlFor="website"
+                      className="text-card-foreground font-medium"
+                    >
+                      Website address
+                    </Label>
+                    <Input
+                      id="website"
+                      name="website"
+                      type="url"
+                      placeholder="https://example.com"
+                      value={formData.website}
+                      onChange={handleChange}
+                      className="bg-background border-border focus:ring-primary"
+                    />
+                  </div>
                 </div>
 
                 <div className="space-y-2">
@@ -98,13 +174,13 @@ const ContactForm = () => {
                     htmlFor="email"
                     className="text-card-foreground font-medium"
                   >
-                    Email Address
+                    Email
                   </Label>
                   <Input
                     id="email"
                     name="email"
                     type="email"
-                    placeholder="Enter your email address"
+                    placeholder="Enter your email"
                     value={formData.email}
                     onChange={handleChange}
                     required
@@ -112,42 +188,68 @@ const ContactForm = () => {
                   />
                 </div>
 
-                <div className="space-y-2">
-                  <Label
-                    htmlFor="name"
-                    className="text-card-foreground font-medium"
-                  >
-                    Company Name
+                <div className="space-y-3">
+                  <Label className="text-card-foreground font-medium">
+                    Role
                   </Label>
-                  <Input
-                    id="companyName"
-                    name="companyName"
-                    type="text"
-                    placeholder="Enter your company name"
-                    value={formData.companyName}
-                    onChange={handleChange}
-                    required
-                    className="bg-background border-border focus:ring-primary"
-                  />
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+                    {roleOptions.map((option) => (
+                      <button
+                        key={option.key}
+                        type="button"
+                        onClick={() =>
+                          setFormData((p) => ({ ...p, role: option.key }))
+                        }
+                        className={cn(
+                          "px-4 py-2 rounded-md border text-sm",
+                          formData.role === option.key
+                            ? "bg-primary text-primary-foreground border-primary"
+                            : "bg-background text-foreground border-border"
+                        )}
+                      >
+                        {option.label}
+                      </button>
+                    ))}
+                  </div>
                 </div>
 
                 <div className="space-y-2">
                   <Label
-                    htmlFor="project"
+                    htmlFor="lookingForward"
                     className="text-card-foreground font-medium"
                   >
-                    Project Field
+                    What are you looking forward to from Residency?
                   </Label>
                   <Textarea
-                    id="project"
-                    name="project"
-                    placeholder="Tell us about your project field, your goals, and how we can help you achieve wellness"
-                    value={formData.project}
+                    id="lookingForward"
+                    name="lookingForward"
+                    placeholder="Share what you hope to get from the residency"
+                    value={formData.lookingForward}
                     onChange={handleChange}
-                    required
-                    rows={5}
+                    rows={4}
                     className="bg-background border-border focus:ring-primary resize-none"
                   />
+                </div>
+
+                <div className="space-y-3">
+                  <Label className="text-card-foreground font-medium">
+                    On a scale of 1–10, how much do you relate with Mind Body
+                    Aaram?
+                  </Label>
+                  <div className="px-1">
+                    <Slider
+                      value={[formData.relationScore]}
+                      onValueChange={(v) =>
+                        setFormData((p) => ({ ...p, relationScore: v[0] }))
+                      }
+                      min={1}
+                      max={10}
+                      step={1}
+                    />
+                    <div className="text-right text-sm text-muted-foreground mt-2">
+                      {formData.relationScore}
+                    </div>
+                  </div>
                 </div>
 
                 <Button

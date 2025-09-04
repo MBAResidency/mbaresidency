@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import heroImage from "@/assets/hero-bg.jpg";
 
 const HeroSection = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -13,17 +12,13 @@ const HeroSection = () => {
   return (
     <section className="relative h-screen overflow-hidden">
       {/* Parallax Background */}
-      <div 
-        className="absolute inset-0 w-full h-[120%] bg-cover bg-center bg-no-repeat"
+      <div
+        className="absolute inset-0 w-full h-[120%] bg-gradient-hero"
         style={{
-          backgroundImage: `url(${heroImage})`,
           transform: `translateY(${scrollY * 0.5}px)`,
         }}
       />
-      
-      {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-hero opacity-80" />
-      
+
       {/* Content */}
       <div className="relative z-10 flex items-center justify-center h-full">
         <div className="text-center text-primary-foreground animate-fade-in">
@@ -38,7 +33,7 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
-      
+
       {/* Scroll Indicator */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
         <div className="w-6 h-10 border-2 border-primary-foreground rounded-full flex justify-center">
