@@ -16,12 +16,12 @@ const BrandSection = () => {
           </p>
         </section>
         <div className="animate-fade-in">
-          <div className="text-6xl md:text-5xl font-bold mt-5 mb-4 sm:flex items-center justify-center gap-5">
+          <div className="text-6xl md:text-5xl font-bold mb-4 sm:flex items-center justify-center gap-5">
             <span className="text-green-600 block sm:inline">MBA : </span>
             <span className="text-black text-3xl mt-2">Mind Body Aaram</span>
           </div>
 
-          <div className="w-24 h-1 bg-gradient-primary mx-auto rounded-full mb-6" />
+          {/* <div className="w-24 h-1 bg-gradient-primary mx-auto rounded-full mb-6" /> */}
 
           {/* Toggle Section */}
           <div className="max-w-2xl mx-auto">
