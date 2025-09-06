@@ -22,10 +22,10 @@ const HeroSection = () => {
       {/* Content */}
       <div className="relative z-10 flex items-center justify-center h-full">
         <div className="text-center text-primary-foreground animate-fade-in">
-          <h1 className="text-6xl md:text-8xl font-bold mb-6 animate-float">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 animate-float">
             Welcome
           </h1>
-          <p className="text-xl md:text-2xl opacity-90 max-w-2xl mx-auto px-6">
+          <p className="text-lg md:text-xl opacity-90 max-w-2xl mx-auto px-6">
             Discover your path to wellness and mindfulness
           </p>
           <div className="mt-8">

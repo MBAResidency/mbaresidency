@@ -14,9 +14,9 @@ const Index = () => {
       <ContactForm />
       <SocialLinks />
 
-      <footer className="py-12 text-center text-sm text-muted-foreground">
+      {/* <footer className="py-12 text-center text-sm text-muted-foreground">
         Designed for Founders by Founders of North Expedition
-      </footer>
+      </footer> */}
     </main>
   );
 };

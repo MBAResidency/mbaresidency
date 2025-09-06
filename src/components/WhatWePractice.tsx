@@ -38,10 +38,10 @@ const WhatWePractice = () => {
     <section className="py-20 bg-background">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16 animate-fade-in">
-          <h3 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">
             What you will practice
-          </h3>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          </h2>
+          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
             Three core energies that power sustainable leadership
           </p>
         </div>
@@ -60,7 +60,7 @@ const WhatWePractice = () => {
               <h3 className="text-xl font-bold text-gray-900 mb-4">
                 {energy.title}
               </h3>
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-gray-600 leading-relaxed whitespace-pre-line">
                 {energy.description}
               </p>
             </div>

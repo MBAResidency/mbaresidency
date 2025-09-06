@@ -1,6 +1,9 @@
 import { Twitter } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-
+import rohan from "@/assets/rohan.jpeg";
+import kirtika from "@/assets/kirtika.jpeg";
+import srikar from "@/assets/srikar.jpeg";
+import logo from "@/assets/logo.png";
 const SocialLinks = () => {
   const socialLinks = [
     {
@@ -27,12 +30,12 @@ const SocialLinks = () => {
     <section className="py-16 bg-background">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12 animate-fade-in">
-          <h3 className="text-3xl md:text-4xl font-bold mb-3 text-foreground">
+          <h2 className="text-3xl md:text-4xl font-bold mb-3 text-foreground">
             Connect With Us
-          </h3>
-          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
+          </h2>
+          {/* <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
             Connect with the team to know more!
-          </p>
+          </p> */}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl mx-auto">
@@ -43,7 +46,28 @@ const SocialLinks = () => {
             >
               <CardContent className="p-5 text-center">
                 <div className="w-12 h-12 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-105 transition-transform duration-200">
-                  <Twitter className="w-6 h-6 text-primary-foreground" />
+                  {/* <Twitter className="w-6 h-6 text-primary-foreground" /> */}
+                  {link.name === "Rohan" && (
+                    <img
+                      src={rohan}
+                      alt="Rohan"
+                      className="w-12 h-12 object-cover rounded-full"
+                    />
+                  )}
+                  {link.name === "Kirtika Goyal" && (
+                    <img
+                      src={kirtika}
+                      alt="Kirtika"
+                      className="w-12 h-12 rounded-full"
+                    />
+                  )}
+                  {link.name === "Srikarmk" && (
+                    <img
+                      src={srikar}
+                      alt="Srikar"
+                      className="w-12 h-12 rounded-full"
+                    />
+                  )}
                 </div>
                 <h4 className="text-lg font-semibold text-card-foreground mb-1">
                   {link.name}
@@ -55,7 +79,16 @@ const SocialLinks = () => {
                   {link.description}
                 </p>
                 <div className="inline-flex items-center gap-2 text-primary transition-colors duration-200 font-medium text-sm">
-                  <Twitter className="w-4 h-4" />
+                  {/* <Twitter className="w-4 h-4" /> */}
+                  {link.name === "Rohan" && (
+                    <img src={logo} alt="Logo" className="w-4 h-4" />
+                  )}
+                  {link.name === "Kirtika Goyal" && (
+                    <img src={logo} alt="Logo" className="w-4 h-4" />
+                  )}
+                  {link.name === "Srikarmk" && (
+                    <img src={logo} alt="Logo" className="w-4 h-4" />
+                  )}
                   Follow
                 </div>
               </CardContent>
@@ -68,6 +101,12 @@ const SocialLinks = () => {
               />
             </Card>
           ))}
+        </div>
+
+        <div className="text-center mt-12">
+          <p className="text-sm text-muted-foreground">
+            Designed for Founders by Founders of North Expedition
+          </p>
         </div>
       </div>
     </section>

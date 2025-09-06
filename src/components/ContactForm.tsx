@@ -29,8 +29,31 @@ const ContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
+  // Calculate form completion progress
+  const calculateProgress = () => {
+    const fields = [
+      formData.fullName,
+      formData.email,
+      formData.company,
+      formData.sector,
+      formData.website,
+      formData.lookingForward,
+    ];
+
+    const filledFields = fields.filter((field) => field.trim() !== "").length;
+    const totalFields = fields.length;
+
+    return filledFields / totalFields;
+  };
+
+  const progress = calculateProgress();
+  const scale = 1 + progress * 0.1; // Scale from 1.0 to 1.1 (10% increase max)
+
+  // Calculate slider scale based on relation score (1-10)
+  const sliderScale = 1 + (formData.relationScore - 1) * 0.05; // Scale from 1.0 to 1.09 (9% increase max)
+
   const roleOptions = [
-    { key: "founder", label: "Founder" },
+    { key: "founder", label: "Solo Founder" },
     { key: "investor", label: "Investor" },
     { key: "cofounder", label: "Co-founder" },
     { key: "team", label: "Team member" },
@@ -80,17 +103,33 @@ const ContactForm = () => {
   };
 
   return (
-    <section className="py-20 bg-gradient-subtle">
+    <section id="apply-section" className="py-20 bg-gradient-subtle">
       <div className="container mx-auto px-6">
         <div className="max-w-2xl mx-auto">
-          <Card className="shadow-large border-0 bg-card">
+          <Card
+            className="shadow-large border-0 bg-card transition-transform duration-500 ease-out"
+            style={{ transform: `scale(${scale})` }}
+          >
             <CardHeader className="text-center">
-              <CardTitle className="text-2xl md:text-3xl font-bold text-card-foreground mb-2">
+              <CardTitle className="text-3xl md:text-4xl font-bold text-card-foreground mb-2">
                 Apply for the Residency
               </CardTitle>
               <CardDescription className="text-base md:text-lg text-muted-foreground">
                 Please share a few details to help us prepare for the residency.
               </CardDescription>
+
+              {/* Progress Bar */}
+              <div className="mt-4">
+                <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+                  <div
+                    className="bg-gradient-primary h-2 rounded-full transition-all duration-500 ease-out"
+                    style={{ width: `${progress * 100}%` }}
+                  />
+                </div>
+                <p className="text-xs text-muted-foreground mt-2">
+                  {Math.round(progress * 100)}% complete
+                </p>
+              </div>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-6">
@@ -237,15 +276,24 @@ const ContactForm = () => {
                     Aaram?
                   </Label>
                   <div className="px-1">
-                    <Slider
-                      value={[formData.relationScore]}
-                      onValueChange={(v) =>
-                        setFormData((p) => ({ ...p, relationScore: v[0] }))
+                    <div
+                      className="slider-container"
+                      style={
+                        {
+                          "--handle-scale": sliderScale,
+                        } as React.CSSProperties
                       }
-                      min={1}
-                      max={10}
-                      step={1}
-                    />
+                    >
+                      <Slider
+                        value={[formData.relationScore]}
+                        onValueChange={(v) =>
+                          setFormData((p) => ({ ...p, relationScore: v[0] }))
+                        }
+                        min={1}
+                        max={10}
+                        step={1}
+                      />
+                    </div>
                     <div className="text-right text-sm text-muted-foreground mt-2">
                       {formData.relationScore}
                     </div>
