@@ -1,6 +1,6 @@
 import { Twitter } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import rohan from "@/assets/rohan.jpeg";
+import rohan from "@/assets/Rohan.jpeg";
 import kirtika from "@/assets/kirtika.jpeg";
 import srikar from "@/assets/srikar.jpeg";
 import logo from "@/assets/logo.png";
