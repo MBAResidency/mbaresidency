@@ -14,6 +14,8 @@ import { useToast } from "@/hooks/use-toast";
 import { Send } from "lucide-react";
 import { Slider } from "@/components/ui/slider";
 import { cn } from "@/lib/utils";
+import { supabase } from "@/utils/supabase/client";
+import emailjs from "@emailjs/browser";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -23,8 +25,8 @@ const ContactForm = () => {
     website: "",
     email: "",
     role: "founder" as "founder" | "investor" | "cofounder" | "team",
-    lookingForward: "",
-    relationScore: 5,
+    lookingfor: "",
+    scale: 5,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
@@ -37,7 +39,7 @@ const ContactForm = () => {
       formData.company,
       formData.sector,
       formData.website,
-      formData.lookingForward,
+      formData.lookingfor,
     ];
 
     const filledFields = fields.filter((field) => field.trim() !== "").length;
@@ -49,8 +51,8 @@ const ContactForm = () => {
   const progress = calculateProgress();
   const scale = 1 + progress * 0.1; // Scale from 1.0 to 1.1 (10% increase max)
 
-  // Calculate slider scale based on relation score (1-10)
-  const sliderScale = 1 + (formData.relationScore - 1) * 0.05; // Scale from 1.0 to 1.09 (9% increase max)
+  // Calculate slider scale based on scale score (1-10)
+  const sliderScale = 1 + (formData.scale - 1) * 0.05; // Scale from 1.0 to 1.09 (9% increase max)
 
   const roleOptions = [
     { key: "founder", label: "Solo Founder" },
@@ -63,9 +65,58 @@ const ContactForm = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission - Replace this with actual Supabase integration
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const { data, error } = await supabase.from("MBA V0").insert([
+        {
+          fullName: formData.fullName,
+          company: formData.company,
+          sector: formData.sector,
+          website: formData.website,
+          email: formData.email,
+          role: formData.role,
+          lookingfor: formData.lookingfor,
+          scale: formData.scale,
+        },
+      ]);
+
+      if (error) {
+        throw error;
+      }
+
+      // Send thank you email using EmailJS
+      try {
+        // Initialize EmailJS with your service ID
+        emailjs.init(
+          import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "your_emailjs_public_key"
+        );
+
+        const emailParams = {
+          email: formData.email,
+          name: formData.fullName,
+          from_name: "Team MBA",
+          message: `Dear ${formData.fullName},
+
+Thank you for submitting your application to the MBA Residency program. We have received your information and are excited about your interest in joining our community.
+
+We'll review your application carefully and get back to you soon with next steps.
+
+If you have any questions in the meantime, please don't hesitate to reach out.
+
+Best regards,
+Team MBA`,
+        };
+
+        await emailjs.send(
+          import.meta.env.VITE_EMAILJS_SERVICE_ID || "your_service_id",
+          import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "your_template_id",
+          emailParams
+        );
+
+        console.log("Thank you email sent successfully");
+      } catch (emailError) {
+        console.warn("Email sending failed:", emailError);
+        // Don't fail the form submission if email fails
+      }
 
       toast({
         title: "Form submitted successfully!",
@@ -79,10 +130,11 @@ const ContactForm = () => {
         website: "",
         email: "",
         role: "founder",
-        lookingForward: "",
-        relationScore: 5,
+        lookingfor: "",
+        scale: 5,
       });
     } catch (error) {
+      console.error("Error submitting form:", error);
       toast({
         title: "Submission failed",
         description: "Please try again later.",
@@ -254,16 +306,16 @@ const ContactForm = () => {
 
                 <div className="space-y-2">
                   <Label
-                    htmlFor="lookingForward"
+                    htmlFor="lookingfor"
                     className="text-card-foreground font-medium"
                   >
                     What are you looking forward to from Residency?
                   </Label>
                   <Textarea
-                    id="lookingForward"
-                    name="lookingForward"
+                    id="lookingfor"
+                    name="lookingfor"
                     placeholder="Share what you hope to get from the residency"
-                    value={formData.lookingForward}
+                    value={formData.lookingfor}
                     onChange={handleChange}
                     rows={4}
                     className="bg-background border-border focus:ring-primary resize-none"
@@ -285,9 +337,9 @@ const ContactForm = () => {
                       }
                     >
                       <Slider
-                        value={[formData.relationScore]}
+                        value={[formData.scale]}
                         onValueChange={(v) =>
-                          setFormData((p) => ({ ...p, relationScore: v[0] }))
+                          setFormData((p) => ({ ...p, scale: v[0] }))
                         }
                         min={1}
                         max={10}
@@ -295,7 +347,7 @@ const ContactForm = () => {
                       />
                     </div>
                     <div className="text-right text-sm text-muted-foreground mt-2">
-                      {formData.relationScore}
+                      {formData.scale}
                     </div>
                   </div>
                 </div>
